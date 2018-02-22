@@ -71,7 +71,7 @@ source ~/.bash_profile
 
 #### 1. 执行上面修改路径的4步。
 
-#### 2. 如果执行 `which node` 获取到的路径是 `/usr/local/bin/node`，说明之前安装的node使用了软链，需要找到当前node的安装目录，例如`/usr/local/node`。
+#### 2. 如果执行 `which node` 获取到的路径是 `/usr/local/bin/node`，说明之前安装的node使用了软链，需要找到当前node的安装目录，例如`/usr/local/node`。
 
 #### 3. 建立软链；
 ```

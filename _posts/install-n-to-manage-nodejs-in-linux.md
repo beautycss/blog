@@ -47,7 +47,7 @@ npm -v
 ```
 which node
 ```
-比如获取到的是 `/usr/local/node`
+比如获取到的是 `/usr/local/node`。如果获取到的路径是 `/usr/local/bin/node`，说明之前安装的node使用了软链，需要找到当前node的安装目录，例如`/usr/local/node`。
 
 #### 2. 打开环境配置文件；
 ```
@@ -71,9 +71,7 @@ source ~/.bash_profile
 
 #### 1. 执行上面修改路径的4步。
 
-#### 2. 如果执行 `which node` 获取到的路径是 `/usr/local/bin/node`，说明之前安装的node使用了软链，需要找到当前node的安装目录，例如`/usr/local/node`。
-
-#### 3. 建立软链；
+#### 2. 找到n的安装目录，建立软链；
 ```
 ln -s /usr/local/node/lib/node_modules/n/bin/n /usr/local/bin/n
 ```

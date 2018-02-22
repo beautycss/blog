@@ -6,7 +6,7 @@ tags: [nodejs]
 ---
 
 
-#### 1. 推荐在淘宝镜像（也可在nodejs官网）下载 [`node-v8.9.0-linux-x64.tar.gz`](http://npm.taobao.org/mirrors/node/latest-v8.x/node-v8.9.0-linux-x64.tar.gz) ，并上传到服务器的 `/usr/local` 目录下;
+#### 1. 推荐在 [淘宝镜像](http://npm.taobao.org) 下载 [`node-v8.9.0-linux-x64.tar.gz`](http://npm.taobao.org/mirrors/node/latest-v8.x/node-v8.9.0-linux-x64.tar.gz) ，并上传到服务器的 `/usr/local` 目录下;
 我这里以`8.9.0`版本为例，且使用的linux服务器为64位的。
 
 

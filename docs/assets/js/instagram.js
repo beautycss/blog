@@ -117,7 +117,7 @@
       var firstYear = 2016;
 
       var host = location.hostname;
-      // var domain = host=='localhost' ? 'http://localhost:4000/instagram' : 'http://beautycss.net/instagram';
+      // var domain = host=='localhost' ? 'http://localhost:4000/instagram' : 'http://cdn.hanhan.pro/ins';
       var domain = 'http://cdn.hanhan.pro/ins';
       var screenWidth = window.innerWidth;
       var isLargeScreen = screenWidth>1170 ? true : false;

@@ -11,7 +11,7 @@ tags: [nodejs, docker, eggjs]
 
 <!--more-->
 
-#### 1：Docker的前端应用场景是什么？
+#### 1：Docker的前端应用场景是什么？
 每个node.js应用需要放在一个独立的环境Ddocker容器）内运行，相互隔离，互不影响。
 
 #### 2：Docker部署node.js应用的优点是什么？
@@ -21,10 +21,10 @@ tags: [nodejs, docker, eggjs]
 在同一台服务器上不能同时运行多个eggjs应用，除非停止另外一个eggjs应用。
 
 #### 4：使用Docker部署node.js应用，大体的流程是什么样的？
-服务器安装好Docker -> 本地应用根目录编写好`Dockfile`文件 -> 将整个应用一起上传到服务器目录下 -> 使用终端连接服务器执行命令安装Docker -> 部署成功。具体的操作请看下文。
+服务器安装好Docker -> 本地应用根目录编写好`Dockfile`文件 -> 将整个应用一起上传到服务器目录下 -> 使用终端连接服务器执行命令安装Docker -> 部署成功。具体的操作请看下文。
 
-### 一、服务器安装Docker
-1. Centos 7下一条命令安装Docker:
+### 一、服务器安装Docker
+1. Centos 7下一条命令安装Docker:
 ```
 sudo yum install -y Docker
 ```
@@ -39,7 +39,7 @@ Docker -v
 
 ### 二、部署node.js应用到服务器
 
-#### 1. 在本地应用的根目录下(package.json所在目录)新建一个名为`Dockerfile`的文件（无后缀），将以下内容复制到文件里，并将`/usr/src/node-app/koa-server`全部替换为你想设置的路径（该路径为docker容器里的路径，可自行设置）：
+#### 1. 在本地应用的根目录下(package.json所在目录)新建一个名为`Dockerfile`的文件（无后缀），将以下内容复制到文件里，并将`/usr/src/node-app/koa-server`全部替换为你想设置的路径（该路径为docker容器里的路径，可自行设置）：
 ```
 # 设置基础镜像,如果本地没有该镜像，会从Docker.io服务器pull镜像
 FROM node:8.6.0-alpine

@@ -5,10 +5,10 @@ type: "nodejs"
 tags: [nodejs, docker, eggjs]
 ---
 
-
-网上也有不少使用Docker部署node.js应用的文章，但有的过于简单甚至有误或不太适合新手。通过参看多篇文章以及本人使用Docker部署egg.js应用的成功经验，总结出了本文。
-
 本文内容包括：linux服务器安装Docker、使用Docker部署node.js应用、更新、Docker里连接主机的mysql数据库，以及可能用到的Docker命令。
+
+网上也有不少类似的文章，但有的过于简单甚至有误，不太适合新手。通过参看多篇文章，并基于使用Docker部署egg.js应用的实践经验整理出了本文。
+
 <!--more-->
 
 #### 1：Docker的前端应用场景是什么？

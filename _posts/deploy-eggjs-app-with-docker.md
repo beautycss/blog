@@ -5,6 +5,9 @@ type: "nodejs"
 tags: [nodejs, docker, eggjs]
 ---
 
+前言
+___
+
 本文内容包括：linux服务器安装Docker、使用Docker部署node.js应用、更新、Docker里连接主机的mysql数据库，以及可能用到的Docker命令。
 
 网上也有不少类似的文章，但有的过于简单甚至有误，不太适合新手。通过参看多篇文章，并基于使用Docker部署egg.js应用的实践经验整理出了本文。
@@ -27,7 +30,8 @@ tags: [nodejs, docker, eggjs]
     -> 使用终端连接服务器执行命令安装Docker 
     -> 部署成功。具体的操作请看下文。
 
-### 一、服务器安装Docker
+服务器安装Docker
+___
 1. Centos 7下一条命令安装Docker:
 ```
 sudo yum install -y Docker
@@ -41,7 +45,8 @@ Docker -v
 本人在Centos 7.2上安装的Docker版本为18.05.0-ce。
 
 
-### 二、部署node.js应用到服务器
+部署node.js应用到服务器
+___
 
 1. egg.js应用需要修改根目录下的package.json（普通node.js应用可忽略这一步）：将`start`这行里命令里的` --daemon`去掉，即启动eggjs使用`egg-scripts start`就好了。在Docker里eggjs应用要在前台运行。
 
@@ -116,11 +121,12 @@ curl -i localhost:9002
 ```
 也可以通过curl命令或者到浏览器里输入应用的访问地址，来查看能否访问应用，如果可以则安装成功。
 
-#### docker容器里eggjs连接mysql：
+docker容器里eggjs连接mysql：
 只需要根据情况修改数据库相关信息即可，在host网络模式下，容器里eggjs的mysql配置文件里的host仍可设置为`localhost`。
 
 
-### 三、更新docker里的node.js应用：
+更新docker里的node.js应用：
+___
 1. 通过查看容器列表，找到需要停止的容器ID；
 ```
 docker ps
@@ -149,20 +155,22 @@ sudo docker rmi -f imageId
 6. 按照上面的步骤重新构建镜像和启动容器。
 
 
-### 四、重点总结：
+重点总结
+___
 1. 使用Centos 7.x版本安装docker。
 2. ` --daemon`要去掉，让eggjs应用直接前台运行。
 3. Dockerfile里先拷贝package.json，安装npm依赖后，再拷贝应用的代码。
 4. 使用境外服务器则不需要使用淘宝的npm镜像源。
 
 
-### 五、可能出现的问题：
+可能出现的问题
+___
 1. npm安装失败：可能是镜像源的问题，需要删除镜像重新构建镜像。
 2. 镜像无法删除：需要先停止和删除容器。
 
 
-### 六、其他常用命令：
-
+其他常用命令
+___
 #### 镜像相关：
 查看镜像构建工程
 ```

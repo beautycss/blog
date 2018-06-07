@@ -79,7 +79,7 @@ CMD npm start
 上面的注释一目了然。整个过程简单描述就是：1.拉取docker镜像（并设置时区等）；2.创建docker工作目录，并将package.json拷贝到docker里；3.安装npm依赖；4.将服务器上的应用拷贝到docker里；5.暴露docker容器的端口，然后启动node应用。
 
 
-#### 2. 使用ftp工具或git工具上传将整个应用到生产环境服务器，并使用终端连接到服务器，进入到服务器应用的目录下；（过程略）
+#### 2. 使用ftp工具或git工具上传将整个应用到生产环境服务器，并使用终端连接到服务器，进入到服务器应用的目录下；（过程略）
 
 #### 3. 执行以下命令，安装docker镜像；
 ```
@@ -100,7 +100,7 @@ sudo docker run -d --name koa-server node/koa-server
 ```
 eggjs应用需要执行以上命令，即增加了` --net=host`使用host网络模式与主机共享网络来连接mysql数据库(暂时使用这种模式成功了，后续研究其他更好方案)；
 
-#### 5. 执行以下命令查看容器是否启动成功；
+#### 5. 执行以下命令查看容器是否启动成功；
 ```
 docker ps
 ```
@@ -138,7 +138,7 @@ sudo docker rmi imageId
 sudo docker rmi -f imageId
 ```
 
-5. 将本地应用代码更新到服务器目录下。
+5. 将本地应用代码更新到服务器目录下。
 
 6. 按照上面的步骤重新构建镜像和启动容器。
 
@@ -146,8 +146,7 @@ sudo docker rmi -f imageId
 ### 四、重点总结：
 1. 使用Centos 7.x版本安装docker。
 2. Dockerfile里先拷贝package.json，安装npm依赖后，再拷贝应用的代码。
-3. 使用境外服务器则不需要使用淘宝的npm镜像源。
-4. 。
+3. 使用境外服务器则不需要使用淘宝的npm镜像源。
 
 
 ### 五、可能出现的问题：
@@ -158,13 +157,13 @@ sudo docker rmi -f imageId
 ### 六、其他常用命令：
 
 #### 镜像相关：
-查看镜像构建工程
+查看镜像构建工程
 ```
 sudo docker history node/koa-server
 ```
 比如上面我们构建`node/koa-server`这个镜像后，可以通过这个命令来查看该镜像的构建过程，来发现问题。
 
-查看所有镜像列表
+查看所有镜像列表
 ```
 docker images
 ```
@@ -176,25 +175,20 @@ sudo docker rmi -f imageId
 ```
 先查看镜像列表，找到要删除的镜像ID，然后使用该命令删除。`-f`为强制删除。
 
-查看所有镜像列表
-```
-docker images
-```
-
 #### 容器相关：
-查看所有容器列表
+查看所有容器列表
 ```
 docker ps
 ```
 
-查看某个容器的信息
+查看某个容器的信息
 ```
 docker logs containerId
 ```
 先查看容器列表，找到要查看容器的ID，然后使用该命令查看。
 
 
-进入某个容器的环境
+进入某个容器的环境
 ```
 sudo docker exec -it containerId /bin/sh
 ```

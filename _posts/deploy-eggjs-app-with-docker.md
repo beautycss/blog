@@ -12,13 +12,13 @@ tags: [nodejs, docker, eggjs]
 
 网上也有不少类似的文章，但有的过于简单甚至有误，不太适合新手。通过参看多篇文章，并基于使用Docker部署egg.js应用的实践经验整理出了本文。
 
-<!--more-->
-
 #### 1：Docker的前端应用场景是什么？
 每个node.js应用需要放在一个独立的环境Docker容器内运行，相互隔离，互不影响。
 
 #### 2：Docker部署node.js应用的优点是什么？
 使用Docker容器部署node.js快速方便，特别是应用较多时部署迁移等使用Docker会更方便。
+
+<!--more-->
 
 #### 3：为什么要使用Docker部署eggjs应用？
 在同一台服务器上不能同时运行多个eggjs应用，除非停止另外一个eggjs应用。

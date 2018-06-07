@@ -34,13 +34,13 @@ tags: [nodejs, docker, eggjs]
 ---
 1. Centos 7下一条命令安装Docker:
 ```
-sudo yum install -y Docker
+sudo yum install -y docker
 ```
 注意：如果要使用Docker，需使用Centos 7.x版本。Docker对内核要求比较高，6.x(6.5以上)能安装的Docker版本比较低（因此会有一些东西不支持），且升级也比较麻烦，此外网上说6.x使用Docker会有不稳定情况。
 
 2. 查看Docker版本：
 ```
-Docker -v
+docker -v
 ```
 本人在Centos 7.2上安装的Docker版本为18.05.0-ce。
 

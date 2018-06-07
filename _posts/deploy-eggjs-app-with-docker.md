@@ -23,6 +23,7 @@ tags: [nodejs, docker, eggjs]
 #### 4：使用Docker部署node.js应用，大体的流程是什么样的？
 服务器安装好Docker -> 本地应用根目录编写好`Dockfile`文件 -> 将整个应用一起上传到服务器目录下 -> 使用终端连接服务器执行命令安装Docker -> 部署成功。具体的操作请看下文。
 
+
 ### 一、服务器安装Docker
 1. Centos 7下一条命令安装Docker:
 ```
@@ -39,7 +40,9 @@ Docker -v
 
 ### 二、部署node.js应用到服务器
 
-#### 1. 在本地应用的根目录下(package.json所在目录)新建一个名为`Dockerfile`的文件（无后缀），将以下内容复制到文件里，并将`/usr/src/node-app/koa-server`全部替换为你想设置的路径（该路径为docker容器里的路径，可自行设置）：
+#### 1. egg.js应用需要修改根目录下的package.json（普通node.js应用可忽略这一步）：将`start`这行里命令里的` --daemon`去掉，即启动eggjs使用`egg-scripts start`就好了。在Docker里eggjs应用要在前台运行。
+
+#### 2. 在本地应用的根目录下(package.json所在目录)新建一个名为`Dockerfile`的文件（无后缀），将以下内容复制到文件里，并将`/usr/src/node-app/koa-server`全部替换为你想设置的路径（该路径为docker容器里的路径，可自行设置）：
 ```
 # 设置基础镜像,如果本地没有该镜像，会从Docker.io服务器pull镜像
 FROM node:8.6.0-alpine
@@ -79,15 +82,15 @@ CMD npm start
 上面的注释一目了然。整个过程简单描述就是：1.拉取docker镜像（并设置时区等）；2.创建docker工作目录，并将package.json拷贝到docker里；3.安装npm依赖；4.将服务器上的应用拷贝到docker里；5.暴露docker容器的端口，然后启动node应用。
 
 
-#### 2. 使用ftp工具或git工具上传将整个应用到生产环境服务器，并使用终端连接到服务器，进入到服务器应用的目录下；（过程略）
+#### 3. 使用ftp工具或git工具上传将整个应用到生产环境服务器，并使用终端连接到服务器，进入到服务器应用的目录下；（过程略）
 
-#### 3. 执行以下命令，安装docker镜像；
+#### 4. 执行以下命令，安装docker镜像；
 ```
 sudo docker build -t node/koa-server .
 ```
 `-t`是对该镜像进行tag标识，标识的名字为`node/koa-server`，可以自定义这个名字。镜像的构建过程依赖于网速，整体还比较快。npm依赖可能会久一些，因为egg.js的依赖比较多。如果所有步骤执行完，会有success的提示，安装成功了。
 
-#### 4. 执行以下命令，使用刚创建好的镜像来启动一个容器；
+#### 5. 执行以下命令，使用刚创建好的镜像来启动一个容器；
 ```
 # 普通node.js应用
 sudo docker run -d --name koa-server -p 9002:9002 node/koa-server
@@ -100,7 +103,7 @@ sudo docker run -d --name koa-server node/koa-server
 ```
 eggjs应用需要执行以上命令，即增加了` --net=host`使用host网络模式与主机共享网络来连接mysql数据库(暂时使用这种模式成功了，后续研究其他更好方案)；
 
-#### 5. 执行以下命令查看容器是否启动成功；
+#### 6. 执行以下命令查看容器是否启动成功；
 ```
 docker ps
 ```
@@ -145,8 +148,9 @@ sudo docker rmi -f imageId
 
 ### 四、重点总结：
 1. 使用Centos 7.x版本安装docker。
-2. Dockerfile里先拷贝package.json，安装npm依赖后，再拷贝应用的代码。
-3. 使用境外服务器则不需要使用淘宝的npm镜像源。
+2. ` --daemon`要去掉，让eggjs应用直接前台运行。
+3. Dockerfile里先拷贝package.json，安装npm依赖后，再拷贝应用的代码。
+4. 使用境外服务器则不需要使用淘宝的npm镜像源。
 
 
 ### 五、可能出现的问题：

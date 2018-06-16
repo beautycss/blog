@@ -43,8 +43,7 @@ cd ./nginx-1.10.3
 
 #### 8. 编译及安装nginx：
 ```
-make
-make instal
+make && make install
 ```
 
 #### 9. 启动nginx命令：

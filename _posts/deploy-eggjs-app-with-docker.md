@@ -32,13 +32,13 @@ tags: [nodejs, docker, eggjs]
 
 服务器安装Docker
 ---
-1. Centos 7下一条命令安装Docker:
+#### 1. Centos 7下一条命令安装Docker:
 ```
 sudo yum install -y docker
 ```
 注意：如果要使用Docker，需使用Centos 7.x版本。Docker对内核要求比较高，6.x(6.5以上)能安装的Docker版本比较低（因此会有一些东西不支持），且升级也比较麻烦，此外网上说6.x使用Docker会有不稳定情况。
 
-2. 查看Docker版本：
+#### 2. 查看Docker版本：
 ```
 docker -v
 ```
@@ -48,9 +48,9 @@ docker -v
 部署node.js应用到服务器
 ---
 
-1. egg.js应用需要修改根目录下的package.json（普通node.js应用可忽略这一步）：将`start`这行里命令里的` --daemon`去掉，即启动eggjs使用`egg-scripts start`就好了。在Docker里eggjs应用要在前台运行。
+#### 1. egg.js应用需要修改根目录下的package.json（普通node.js应用可忽略这一步）：将`start`这行里命令里的` --daemon`去掉，即启动eggjs使用`egg-scripts start`就好了。在Docker里eggjs应用要在前台运行。
 
-2. 在本地应用的根目录下(package.json所在目录)新建一个名为`Dockerfile`的文件（无后缀），将以下内容复制到文件里，并将`/usr/src/node-app/koa-server`全部替换为你想设置的路径（该路径为docker容器里的路径，可自行设置）：
+#### 2. 在本地应用的根目录下(package.json所在目录)新建一个名为`Dockerfile`的文件（无后缀），将以下内容复制到文件里，并将`/usr/src/node-app/koa-server`全部替换为你想设置的路径（该路径为docker容器里的路径，可自行设置）：
 ```
 # 设置基础镜像,如果本地没有该镜像，会从Docker.io服务器pull镜像
 FROM node:8.6.0-alpine
@@ -90,15 +90,15 @@ CMD npm start
 上面的注释一目了然。整个过程简单描述就是：1.拉取docker镜像（并设置时区等）；2.创建docker工作目录，并将package.json拷贝到docker里；3.安装npm依赖；4.将服务器上的应用拷贝到docker里；5.暴露docker容器的端口，然后启动node应用。
 
 
-3. 使用ftp工具或git工具上传将整个应用到生产环境服务器，并使用终端连接到服务器，进入到服务器应用的目录下；（过程略）
+#### 3. 使用ftp工具或git工具上传将整个应用到生产环境服务器，并使用终端连接到服务器，进入到服务器应用的目录下；（过程略）
 
-4. 执行以下命令，安装docker镜像；
+#### 4. 执行以下命令，安装docker镜像；
 ```
 sudo docker build -t node/koa-server .
 ```
 `-t`是对该镜像进行tag标识，标识的名字为`node/koa-server`，可以自定义这个名字。镜像的构建过程依赖于网速，整体还比较快。npm依赖可能会久一些，因为egg.js的依赖比较多。如果所有步骤执行完，会有success的提示，安装成功了。
 
-5. 执行以下命令，使用刚创建好的镜像来启动一个容器；
+#### 5. 执行以下命令，使用刚创建好的镜像来启动一个容器；
 ```
 # 普通node.js应用
 sudo docker run -d --name koa-server -p 9002:9002 node/koa-server
@@ -111,7 +111,7 @@ sudo docker run -d --name koa-server node/koa-server
 ```
 eggjs应用需要执行以上命令，即增加了` --net=host`使用host网络模式与主机共享网络来连接mysql数据库(暂时使用这种模式成功了，后续研究其他更好方案)；
 
-6. 执行以下命令查看容器是否启动成功；
+#### 6. 执行以下命令查看容器是否启动成功；
 ```
 docker ps
 ```
@@ -127,22 +127,22 @@ docker容器里eggjs连接mysql：
 
 更新docker里的node.js应用：
 ---
-1. 通过查看容器列表，找到需要停止的容器ID；
+#### 1. 通过查看容器列表，找到需要停止的容器ID；
 ```
 docker ps
 ```
 
-2. 停止容器；
+#### 2. 停止容器；
 ```
 sudo docker stop containerId
 ```
 
-3. 删除容器；
+#### 3. 删除容器；
 ```
 sudo docker rm containerId
 ```
 
-4. 删除镜像；
+#### 4. 删除镜像；
 ```
 # 正常情况可以删除
 sudo docker rmi imageId
@@ -150,9 +150,9 @@ sudo docker rmi imageId
 sudo docker rmi -f imageId
 ```
 
-5. 将本地应用代码更新到服务器目录下。
+#### 5. 将本地应用代码更新到服务器目录下。
 
-6. 按照上面的步骤重新构建镜像和启动容器。
+#### 6. 按照上面的步骤重新构建镜像和启动容器。
 
 
 重点总结

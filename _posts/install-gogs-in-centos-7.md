@@ -117,6 +117,17 @@ chmod +x post-update
 #### 5. 修改`blog.git`仓库下的任意文件并提交代码，然后检查nginx目录下的文件，应该会更新成功，则自动部署成功。
 
 
+#### 6. hexo的自动部署需修改hexo根目录下`_config.yml`文件里的`deploy`部分；
+```
+deploy:
+  type: git
+  repo: http://git.yoursite.com/user/blog.git
+  branch: master
+```
+修改`repo`和`branch`就可以了，一定要注意修改`branch`为你的正确的branch，然后执行`hexo d`应该会自动部署到刚才设置的nginx目录下了。
+
+
+
 ### 官方常见问题：
 [https://gogs.io/docs/intro/faqs](https://gogs.io/docs/intro/faqs)
 

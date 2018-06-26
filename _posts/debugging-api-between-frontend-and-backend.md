@@ -7,7 +7,7 @@ tags: [api]
 
 在项目开发过程中，前端与后端联调接口会碰到很多问题，比如规范、跨域等问题，因此做了一下总结，方前后端的同学参考。
 
-## 接口规范篇（后端）：
+## 接口规范：
 
 #### 1. 给出固定的路径，比如`/xxapi`；
 
@@ -48,4 +48,31 @@ success: true,
 message: '请求成功',
 ```
 
+## 跨域解决方案：
 
+#### 1. 不同端口或不同的域名产生的跨域，错误如下：
+
+```
+Failed to load ... : No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://...' is therefore not allowed access. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
+```
+
+解决方案：
+```
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET,PUT,POST,DELETE,OPTIONS
+
+```
+如果后端是JAVA,一般是在开发环境服务器的nginx增加上面的配置。
+
+
+```
+Access-Control-Allow-Headers: Content-Type,*
+```
+
+```
+Access-Control-Allow-Credentials: true
+```
+
+```
+Access-Control-Expose-Headers: x-session-expired,x-session-noperms
+```

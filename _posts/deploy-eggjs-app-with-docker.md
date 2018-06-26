@@ -32,17 +32,37 @@ tags: [nodejs, docker, eggjs]
 
 服务器安装Docker
 ---
-#### 1. Centos 7下一条命令安装Docker:
-```
-sudo yum install -y docker
-```
-注意：如果要使用Docker，需使用Centos 7.x版本。Docker对内核要求比较高，6.x(6.5以上)能安装的Docker版本比较低（因此会有一些东西不支持），且升级也比较麻烦，此外网上说6.x使用Docker会有不稳定情况。
+如果要使用Docker，需使用Centos 7.x版本。Docker对内核要求比较高，要在Centos6.5及更高的版本的64位系统里安装，网上说6.x使用Docker会有不稳定情况。本文安装`docker ce`版本。
 
-#### 2. 查看Docker版本：
+#### 1. 安装一些系统依赖:
+```
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+```
+
+#### 2. 添加软件源，这里使用阿里的源，更快更稳定:
+```
+sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+```
+
+#### 3. 更新 `yum` 软件源缓存，并安装 `docker-ce`:
+```
+sudo yum makecache fast
+sudo yum install docker-ce
+```
+
+#### 4. 启动`docker-ce`:
+```
+sudo systemctl enable docker
+sudo systemctl start docker
+```
+
+#### 5. 查看Docker版本：
 ```
 docker -v
 ```
 本人在Centos 7.2上安装的Docker版本为18.05.0-ce。
+
+关于`docker`的使用等可查看 [非官方docker中文版文档](https://yeasy.gitbooks.io/docker_practice/container/run.html)。
 
 
 部署node.js应用到服务器
@@ -107,7 +127,7 @@ sudo docker run -d --name koa-server -p 9002:9002 node/koa-server
 
 ```
 # eggjs应用
-sudo docker run -d --name koa-server node/koa-server
+sudo docker run -d --net=host --name koa-server node/koa-server
 ```
 eggjs应用需要执行以上命令，即增加了` --net=host`使用host网络模式与主机共享网络来连接mysql数据库(暂时使用这种模式成功了，后续研究其他更好方案)；
 
@@ -207,5 +227,5 @@ docker logs containerId
 ```
 sudo docker exec -it containerId /bin/sh
 ```
-先查看容器列表，找到要查看容器的ID，然后使用该命令查看。`/bin/sh`可在执行`docker ps`后查看到。
+先查看容器列表，找到要查看容器的ID，然后使用该命令查看。`/bin/sh`可在执行`docker ps`后看到。退出容器可以执行`exit;`。
 

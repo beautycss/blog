@@ -83,7 +83,7 @@ nginx配置文件中添加这项配置，表示接收前端的`Content-Type`。
 ```
 Failed to load ... : Response to preflight request doesn't pass access control check: The value of the 'Access-Control-Allow-Credentials' header in the response is '' which must be 'true' when the request's credentials mode is 'include'. Origin 'http://...' is therefore not allowed access.
 ```
-出现这个错误是因为前端请求接口的时候在请求头里加了`credentials: 'include'`参数携带cookie信息，而后端未做接收cookie的设置。
+出现这个错误是因为前端请求接口的时候在请求头里加了`credentials: 'include'`参数携带cookie信息，而后端未做接收cookie的设置。
 
 解决方案：
 ```

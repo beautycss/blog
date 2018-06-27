@@ -129,19 +129,25 @@ sudo docker run -d --name koa-server -p 9002:9002 node/koa-server
 # eggjs应用
 sudo docker run -d --net=host --name koa-server node/koa-server
 ```
-eggjs应用需要执行以上命令，即增加了` --net=host`使用host网络模式与主机共享网络来连接mysql数据库(暂时使用这种模式成功了，后续研究其他更好方案)；
+eggjs应用需要执行以上命令，即增加了` --net=host`，该参数表示使用host网络模式与主机共享网络来连接mysql数据库；(暂时使用这种模式成功了，后续研究其他更好方案)。
 
 #### 6. 执行以下命令查看容器是否启动成功；
 ```
 docker ps
 ```
 以上命令是查看运行中的容器。如果刚才启动成功，则会显示出来。
+
 ```
 curl -i localhost:9002
 ```
 也可以通过curl命令或者到浏览器里输入应用的访问地址，来查看能否访问应用，如果可以则安装成功。
 
-docker容器里eggjs连接mysql：
+```
+docker logs containerId
+```
+如果刚才执行`docker ps`没有看到刚刚启动的容器，说明启动失败，使用该命令来查看启动的具体情况。
+
+#### 7. docker容器里eggjs连接mysql：
 只需要根据情况修改数据库相关信息即可，在host网络模式下，容器里eggjs的mysql配置文件里的host仍可设置为`localhost`。
 
 

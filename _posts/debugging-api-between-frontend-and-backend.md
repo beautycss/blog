@@ -15,7 +15,7 @@ tags: [api, cors]
 ```
 data: null,
 success: true,
-message: '请求成功',
+message: "请求成功",
 ```
 默认的数据结构应该至少有这3个属性，如果没有数据则 `data` 为 `null` ；`success`属性是方便前端判断响应结果是否为成功的状态，比如登录页需要响应给前端的错误信息有很多种，而前端首先需要知道是成功还是失败来进行逻辑编码；如果失败，前端可直接将`message`显示给用户。
 <!--more-->
@@ -24,8 +24,8 @@ message: '请求成功',
 ```
 data: [
     list: [
-        {id:1, title: '1'},
-        {id:2, title: '2'},
+        {id:1, title: "1"},
+        {id:2, title: "2"},
         ...
     ],
     pagination: {
@@ -34,19 +34,19 @@ data: [
     }
 ],
 success: true,
-message: '请求成功',
+message: "请求成功",
 ```
 total为记录总数，current为当前第几页，默认显示数前后端应商定好，比如20条，写到各自工程的配置参数。
 
 #### 4. 详情页的数据结构；
 ```
 data: [
-    title: '标题',
-    content: '内容',
+    title: "标题",
+    content: "内容",
     ...
 ],
 success: true,
-message: '请求成功',
+message: "请求成功",
 ```
 
 ## 常见接口报错及解决方案：

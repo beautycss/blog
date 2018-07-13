@@ -40,6 +40,14 @@ tags: [nginx, 跨域]
     /usr/local/nginx/sbin/nginx -s reload
 ```
 
-#### 6. 清除浏览器缓存并查看效果，完成。
+#### 6. 清除浏览器缓存并刷新查看效果，完成。
 
+
+#### 7. 如果图标还不显示，需要设置字体的根目录，添加`root`配置，然后重启nginx并刷新查看。
+```
+    location ~* \.(ttf|otf|eot|woff|woff2)$ {
+        root /usr/www;
+        add_header Access-Control-Allow-Origin *;
+    }
+```
 

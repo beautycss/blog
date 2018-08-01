@@ -1,5 +1,5 @@
 ---
-title: 在Docker中部署Egg.js应用
+title: 在Docker中部署Egg.js应用及Docker常用命令
 date: 2018-06-06
 type: "nodejs"
 tags: [nodejs, docker, eggjs]
@@ -216,6 +216,7 @@ sudo docker rmi -f imageId
 ```
 先查看镜像列表，找到要删除的镜像ID，然后使用该命令删除。`-f`为强制删除。
 
+
 #### 容器相关：
 查看所有容器列表
 ```
@@ -228,6 +229,11 @@ docker logs containerId
 ```
 先查看容器列表，找到要查看容器的ID，然后使用该命令查看。
 
+拷贝主机的文件到容器的目录下
+```
+docker cp src/. mycontainer:/target
+```
+`src`为要拷贝的目录名，`mycontainer`为容器的id，`target`为目标目录名。
 
 进入某个容器的环境
 ```
